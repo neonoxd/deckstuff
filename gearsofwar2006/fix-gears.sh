@@ -78,7 +78,7 @@ read -p "STEP 1/$NUMSTEPS Done. Press any key to procede... Next: installing dep
 # installing os dependencies
 echo setting up install environment
 
-echo OFF: protontricks -v $appid \
+protontricks -v $appid \
     arial physx xact_x64 d3dx9 d3dx10 d3dx10_43 d3dcompiler_42 d3dcompiler_43 d3dcompiler_46 d3dcompiler_47
 
 echo
@@ -87,7 +87,7 @@ read -p "STEP 2/$NUMSTEPS Done. Press any key to procede... Next: installing GFW
 
 # installing gfwl
 echo installing GFWL..
-echo OFF: STEAM_COMPAT_CLIENT_INSTALL_PATH="$steampath" \
+STEAM_COMPAT_CLIENT_INSTALL_PATH="$steampath" \
 STEAM_COMPAT_DATA_PATH=$(dirname "$(realpath $WINEPREFIX)") \
 proton run ./dl/gfwl.exe
 echo
@@ -96,13 +96,13 @@ read -p "STEP 3/$NUMSTEPS Done. Press any key to procede... Next: patching the g
 
 # working around the game launcher
 echo fixing the game launcher...
-echo OFF: cp ./dl/default.htm $WINEPREFIX/drive_c/users/steamuser/AppData/Roaming/Microsoft\ Games/Gears\ of\ War/CurrentSite/default.htm
+cp ./dl/default.htm $WINEPREFIX/drive_c/users/steamuser/AppData/Roaming/Microsoft\ Games/Gears\ of\ War/CurrentSite/default.htm
 echo
 read -p "STEP 4/$NUMSTEPS Done. Press any key to procede... Next: final prefix changes"
 
 # 
 echo setting prefix to windows 7 and enabling virtual desktop
-echo OFF: protontricks -v $appid win7 vd=800x600
+protontricks -v $appid win7 vd=800x600
 
 echo "STEP 5/$NUMSTEPS Done."
 echo
