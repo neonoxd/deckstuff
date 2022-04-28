@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Based off the lutris install script https://lutris.net/games/install/29680/view
+# Some snippets taken from https://github.com/z0z0z/mf-install
+
 # Requirements:
 # installed and patched game
 # wget, protontricks, proton
@@ -43,7 +46,18 @@ check_dir "$WINEPREFIX" drive_c
 set -e
 
 # put proton to PATH
-export PATH="$PROTON:$PATH"
+if [ -d "$PROTON/files" ]; then
+    prefix="files"
+elif [ -d "$PROTON/dist" ]; then
+    prefix="dist"
+fi
+
+export PATH="$PROTON/$prefix/bin:$PROTON:$PATH"
+
+# these might not be needed
+export WINESERVER="$PROTON/$prefix/bin/wineserver"
+export WINELOADER="$PROTON/$prefix/bin/wine"
+export WINEDLLPATH="$PROTON/$prefix/lib/wine:$PROTON/$prefix/lib64/wine"
 
 # setting up steam path - override STEAM_COMPAT_CLIENT_INSTALL_PATH if not on SteamDeck/default install
 steampath=${STEAM_COMPAT_CLIENT_INSTALL_PATH:-"/home/$USER/.local/share/Steam"}
@@ -106,6 +120,11 @@ protontricks -v $appid win7 vd=800x600
 
 echo "STEP 5/$NUMSTEPS Done."
 echo
+
+echo "cleaning up. if it fails close the wine processes manually, or restart your steamdeck before trying to run the game"
+
+wineserver -k
+
 echo "set your game launch parameters in steam to the following:"
 echo "DXVK_ASYNC=1 PROTON_NO_ESYNC=1 PROTON_NO_FSYNC=1 %command%"
 echo Have Fun!
