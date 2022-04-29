@@ -54,7 +54,7 @@ configure_prefix() {
     # installing os dependencies
     echo setting up install environment
 
-    echo OFF: protontricks -v $appid \
+    protontricks -v $appid \
         arial physx xact_x64 d3dx9 d3dx10 d3dx10_43 d3dcompiler_42 d3dcompiler_43 d3dcompiler_46 d3dcompiler_47
 
     echo
@@ -63,7 +63,7 @@ configure_prefix() {
 install_gfwl() {
     # installing gfwl
     echo installing GFWL..
-    echo OFF: STEAM_COMPAT_CLIENT_INSTALL_PATH="$steampath" \
+    STEAM_COMPAT_CLIENT_INSTALL_PATH="$steampath" \
     STEAM_COMPAT_DATA_PATH=$(dirname "$(realpath $WINEPREFIX)") \
     proton run ./dl/gfwl.exe
     echo
@@ -72,14 +72,14 @@ install_gfwl() {
 fix_launcher() {
     # working around the game launcher
     echo fixing the game launcher...
-    echo OFF: cp ./dl/default.htm $WINEPREFIX/drive_c/users/steamuser/AppData/Roaming/Microsoft\ Games/Gears\ of\ War/CurrentSite/default.htm
+    cp ./dl/default.htm $WINEPREFIX/drive_c/users/steamuser/AppData/Roaming/Microsoft\ Games/Gears\ of\ War/CurrentSite/default.htm
     echo
 }
 
 finalize_prefix() {
     # might also work if its done along with the first prefix configuration
     echo setting prefix to windows 7 and enabling virtual desktop
-    echo OFF: protontricks -v $appid win7 vd=800x600
+    protontricks -v $appid win7 vd=800x600
 }
 
 cleanup_wineprocesses() {
@@ -117,7 +117,7 @@ fi
 echo -e ${YELLOW}checking env...${NC}
 check_env "$PROTON" PROTON
 check_env "$WINEPREFIX" WINEPREFIX
-echo OFF: check_dir "$WINEPREFIX" drive_c
+check_dir "$WINEPREFIX" drive_c
 
 set -e
 
