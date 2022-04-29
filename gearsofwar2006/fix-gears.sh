@@ -83,6 +83,10 @@ finalize_prefix() {
 }
 
 cleanup_wineprocesses() {
+    # these might not be needed
+    export WINESERVER="$PROTON/$prefix/bin/wineserver"
+    export WINELOADER="$PROTON/$prefix/bin/wine"
+    export WINEDLLPATH="$PROTON/$prefix/lib/wine:$PROTON/$prefix/lib64/wine"
     wineserver -k
 }
 
@@ -129,11 +133,6 @@ elif [ -d "$PROTON/dist" ]; then
 fi
 
 export PATH="$PROTON/$prefix/bin:$PROTON:$PATH"
-
-# these might not be needed
-export WINESERVER="$PROTON/$prefix/bin/wineserver"
-export WINELOADER="$PROTON/$prefix/bin/wine"
-export WINEDLLPATH="$PROTON/$prefix/lib/wine:$PROTON/$prefix/lib64/wine"
 
 # setting up steam path - override STEAM_COMPAT_CLIENT_INSTALL_PATH if not on SteamDeck/default install
 steampath=${STEAM_COMPAT_CLIENT_INSTALL_PATH:-"/home/$USER/.local/share/Steam"}
