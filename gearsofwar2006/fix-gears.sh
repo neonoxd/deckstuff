@@ -72,7 +72,7 @@ install_gfwl() {
 fix_launcher() {
     # working around the game launcher
     echo fixing the game launcher...
-    cp ./dl/default.htm $WINEPREFIX/drive_c/users/steamuser/AppData/Roaming/Microsoft\ Games/Gears\ of\ War/CurrentSite/default.htm
+    cp -v ./dl/default.htm $WINEPREFIX/drive_c/users/steamuser/AppData/Roaming/Microsoft\ Games/Gears\ of\ War/CurrentSite/default.htm
     echo
 }
 
@@ -112,13 +112,7 @@ if [ ! -d "./dl" ]; then
     mkdir dl
 fi
 
-# overriding protontricks if using flatpak version - otherwise look for protontricks on PATH
-if [ "$2" = "-flatpak" ]; then
-    overrides=$(dirname "$(realpath bin/protontricks)")
-    export PATH="$overrides:$PATH"
-fi
-
-echo -e ${YELLOW}checking env...${NC}
+echo -e ${YELLOW}checking environment...${NC}
 check_env "$PROTON" PROTON
 check_env "$WINEPREFIX" WINEPREFIX
 check_dir "$WINEPREFIX" drive_c
@@ -136,6 +130,12 @@ export PATH="$PROTON/$prefix/bin:$PROTON:$PATH"
 
 # setting up steam path - override STEAM_COMPAT_CLIENT_INSTALL_PATH if not on SteamDeck/default install
 steampath=${STEAM_COMPAT_CLIENT_INSTALL_PATH:-"/home/$USER/.local/share/Steam"}
+
+# overriding protontricks if using flatpak version - otherwise look for protontricks on PATH
+if [ "$2" = "-flatpak" ]; then
+    overrides=$(dirname "$(realpath bin/protontricks)")
+    export PATH="$overrides:$PATH"
+fi
 
 # confirm settings
 echo using protontricks -\> $(which protontricks)
@@ -177,6 +177,8 @@ echo
 echo -e "${WHITE}set your game launch parameters in Steam to the following:${NC}"
 echo -e "${YELLOW}DXVK_ASYNC=1 PROTON_NO_ESYNC=1 PROTON_NO_FSYNC=1 %command%${NC}"
 echo
+
+
 echo "attempting cleanup... if it fails, close the wine processes manually, or restart your steamdeck before trying to run the game"
 do_step cleanup_wineprocesses
 
