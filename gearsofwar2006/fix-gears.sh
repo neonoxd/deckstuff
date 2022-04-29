@@ -157,23 +157,23 @@ echo -e "${WHITE}STEP 1/$NUMSTEPS Done.${NC} Next: installing dependencies with 
 
 do_step configure_prefix $3
 echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
-echo -e "${WHITE}STEP 2/$NUMSTEPS Done.${NC} Next: installing GFWL"
-
-
-do_step install_gfwl $3
-echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
-echo -e "${WHITE}STEP 3/$NUMSTEPS Done.${NC} Next: patching the game launcher"
+echo -e "${WHITE}STEP 2/$NUMSTEPS Done.${NC} Next: patching the game launcher"
 
 
 do_step fix_launcher $3
 echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
-echo -e "${WHITE}STEP 4/$NUMSTEPS Done.${NC} Next: final prefix changes"
+echo -e "${WHITE}STEP 3/$NUMSTEPS Done.${NC} Next: final prefix changes"
 
 
 do_step finalize_prefix $3
 echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
+echo -e "${WHITE}STEP 4/$NUMSTEPS Done.${NC} Next: installing GFWL"
+
+do_step install_gfwl $3
+echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
 echo -e "${WHITE}STEP 5/$NUMSTEPS Done.${NC}"
 echo
+
 echo -e "${WHITE}set your game launch parameters in Steam to the following:${NC}"
 echo -e "${YELLOW}DXVK_ASYNC=1 PROTON_NO_ESYNC=1 PROTON_NO_FSYNC=1 %command%${NC}"
 echo
