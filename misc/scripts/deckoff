@@ -1,0 +1,3 @@
+#!/bin/bash
+echo unmounting /mnt/deck
+umount /mnt/deck

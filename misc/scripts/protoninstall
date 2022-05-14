@@ -1,0 +1,27 @@
+#!/bin/bash
+# run executable inside proton prefix
+
+steampath=${STEAM_COMPAT_CLIENT_INSTALL_PATH:-"/home/$USER/.local/share/Steam"}
+compath=${STEAM_COMPAT_DATA_PATH:-$steampath/steamapps/compatdata/$1}
+latestproton=$(ls -td $steampath/compatibilitytools.d/*/ | head -1)
+PROTON=${PROTON:-$latestproton}
+
+# put proton to PATH
+if [ -d "$PROTON/files" ]; then
+    prefix="files"
+elif [ -d "$PROTON/dist" ]; then
+    prefix="dist"
+fi
+
+export PATH="$PROTON/$prefix/bin:$PROTON:$PATH"
+
+echo $steampath
+echo $compath
+echo $latestproton
+echo $PROTON
+echo $(which proton)
+
+STEAM_COMPAT_CLIENT_INSTALL_PATH="$steampath" \
+STEAM_COMPAT_DATA_PATH="$compath" \
+proton run $2
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+echo mounting deck:/home/deck to /mnt/deck
+sshfs -o allow_other deck:/home/deck /mnt/deck

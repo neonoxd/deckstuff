@@ -1,0 +1,3 @@
+#!/bin/bash
+# starts vnc server with pw
+x11vnc -passwd $1 -xkb

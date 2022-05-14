@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo mount -t cifs -o credentials=/etc/win-credentials //x/psxrips /mnt/winshare/roms/psx
+sudo mount -t cifs -o credentials=/etc/win-credentials //x/psprips /mnt/winshare/roms/psp
+sudo mount -t cifs -o credentials=/etc/win-credentials //x/ps2rips /mnt/winshare/roms/ps2
+
+sudo mount -t cifs -o credentials=/etc/win-credentials //x/DuckStation /mnt/winshare/other/DuckStation
