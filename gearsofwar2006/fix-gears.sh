@@ -99,10 +99,10 @@ NC='\033[0m'
 if [ $# -eq 0 ]
   then
     echo -e ${RED}init.sh: missing params${NC}
-    echo "usage: fix-gears.sh <appid> [-flatpak]"
+    echo "usage: fix-gears.sh [-flatpak] [y]"
     exit 1
 fi
-appid=$1
+appid=$APPID
 NUMSTEPS="5"
 
 
@@ -132,7 +132,7 @@ export PATH="$PROTON/$prefix/bin:$PROTON:$PATH"
 steampath=${STEAM_COMPAT_CLIENT_INSTALL_PATH:-"/home/$USER/.local/share/Steam"}
 
 # overriding protontricks if using flatpak version - otherwise look for protontricks on PATH
-if [ "$2" = "-flatpak" ]; then
+if [ "$1" = "-flatpak" ]; then
     overrides=$(dirname "$(realpath bin/protontricks)")
     export PATH="$overrides:$PATH"
 fi
@@ -150,26 +150,26 @@ echo -e "${WHITE}---------------------------------------------------------------
 echo -e "${WHITE}STEP 0/$NUMSTEPS Done.${NC} Next: downloading gfwl and launcher patch"
 
 
-do_step setup_downloads $3
+do_step setup_downloads $2
 echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
 echo -e "${WHITE}STEP 1/$NUMSTEPS Done.${NC} Next: installing dependencies with protontricks"
 
 
-do_step configure_prefix $3
+do_step configure_prefix $2
 echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
 echo -e "${WHITE}STEP 2/$NUMSTEPS Done.${NC} Next: patching the game launcher"
 
 
-do_step fix_launcher $3
+do_step fix_launcher $2
 echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
 echo -e "${WHITE}STEP 3/$NUMSTEPS Done.${NC} Next: final prefix changes"
 
 
-do_step finalize_prefix $3
+do_step finalize_prefix $2
 echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
 echo -e "${WHITE}STEP 4/$NUMSTEPS Done.${NC} Next: installing GFWL"
 
-do_step install_gfwl $3
+do_step install_gfwl $2
 echo -e "${WHITE}---------------------------------------------------------------------------${NC}"
 echo -e "${WHITE}STEP 5/$NUMSTEPS Done.${NC}"
 echo

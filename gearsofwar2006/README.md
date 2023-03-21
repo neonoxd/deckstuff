@@ -15,7 +15,8 @@ installed game, wget, protontricks, proton
 ```sh
 PROTON=/home/deck/.local/share/Steam/compatibilitytools.d/GE-Proton7-15 \
 WINEPREFIX=/home/deck/.local/share/Steam/steamapps/compatdata/13371337/pfx \
-./fix-gears.sh 13371337 -flatpak y
+APPID=13371337 \
+./fix-gears.sh -flatpak y
 ```
 
 ## Notes:
