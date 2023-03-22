@@ -175,7 +175,7 @@ echo -e "${WHITE}STEP 5/$NUMSTEPS Done.${NC}"
 echo
 
 echo -e "${WHITE}set your game launch parameters in Steam to the following:${NC}"
-echo -e "${YELLOW}DXVK_ASYNC=1 PROTON_NO_ESYNC=1 PROTON_NO_FSYNC=1 %command%${NC}"
+echo -e "${YELLOW}PROTON_NO_ESYNC=1 PROTON_NO_FSYNC=1 %command%${NC}"
 echo
 
 
