@@ -38,7 +38,7 @@ setup_downloads() {
     if  [ -f "./dl/gfwl.exe" ]; then
         echo file [gfwl.exe] exists
     else
-        wget http://fs2.download82.com/software/bbd8ff9dba17080c0c121804efbd61d5/games-for-windows-live/gfwlivesetup.exe \
+        wget https://archive.org/download/gfwlive/gfwlivesetup.exe \
         -O dl/gfwl.exe
     fi
 
